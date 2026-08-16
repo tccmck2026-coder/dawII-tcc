@@ -1,0 +1,309 @@
+.overlay {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f3f4f6;
+  font-family: system-ui, sans-serif;
+}
+
+.card {
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px #0000001f;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  color: #fff;
+  background: #6f8a6a;
+}
+
+.header h1 {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
+}
+
+.backButton {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.headerSpacer {
+  width: 18px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.estado,
+.estadoErro {
+  margin: 0;
+  padding: 24px 0;
+  color: #6b7280;
+  font-size: 14px;
+  text-align: center;
+}
+
+.estadoErro {
+  color: #b91c1c;
+}
+
+.ocorrenciaCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.topo,
+.tags,
+.statusWrapper,
+.rodape,
+.envolvidos {
+  display: flex;
+  align-items: center;
+}
+
+.topo,
+.rodape {
+  justify-content: space-between;
+}
+
+.topo {
+  gap: 8px;
+}
+
+.tags {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.statusWrapper {
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.pillNivel,
+.pillCategoria {
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pillNivelLeve {
+  color: #14532d;
+  background: #cce8cc;
+}
+
+.pillNivelGrave {
+  color: #713f12;
+  background: #fde68a;
+}
+
+.pillNivelGravissimo {
+  color: #7f1d1d;
+  background: #fca5a5;
+}
+
+.pillCategoria {
+  color: #374151;
+  background: #d1d5db;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: #9ca3af;
+  border-radius: 50%;
+}
+
+.dotAndamento {
+  background: #facc15;
+}
+
+.dotFinalizado {
+  background: #22c55e;
+}
+
+.dotCancelado {
+  background: #ef4444;
+}
+
+.statusTexto {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.descricao {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.providenciasBox {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.providenciasTitulo {
+  color: #4f6b4c;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.providenciasTexto {
+  margin: 4px 0 0;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.rodape {
+  color: #374151;
+  font-size: 12px;
+}
+
+.envolvidos {
+  display: inline-flex;
+  gap: 6px;
+  color: #5d3b8c;
+}
+
+.iconeEnvolvidos {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+  color: #8f9991;
+}
+
+.data {
+  font-weight: 600;
+}
+
+.footer {
+  padding: 12px 20px;
+  color: #6b7280;
+  border-top: 1px solid #e5e7eb;
+  font-size: 12px;
+}
+
+.menuWrapper {
+  position: relative;
+}
+
+.menu {
+  padding: 2px 6px;
+  color: #6b7280;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.menu:hover {
+  background: #f3f4f6;
+}
+
+.menuDropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 20;
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px #0000001f;
+}
+
+.menuDropdown button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menuEditar {
+  color: #4f6b4c;
+}
+
+.menuEditar:hover {
+  background: #e6f1e7;
+}
+
+.menuExcluir {
+  color: #dc2626;
+}
+
+.menuExcluir:hover {
+  background: #fee2e2;
+}
+
+@media (max-width: 600px) {
+  .overlay {
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .card {
+    max-width: none;
+    min-height: 100vh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .body {
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .ocorrenciaCard {
+    padding: 12px;
+  }
+
+  .topo {
+    align-items: flex-start;
+  }
+
+  .pillNivel,
+  .pillCategoria {
+    padding: 4px 10px;
+  }
+};
