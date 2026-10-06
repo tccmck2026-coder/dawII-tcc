@@ -182,14 +182,24 @@
 }
 
 .rodape {
+  align-items: flex-start;
+  gap: 12px;
   color: #374151;
   font-size: 12px;
 }
 
 .envolvidos {
-  display: inline-flex;
+  flex: 1;
+  min-width: 0;
+  align-items: flex-start;
   gap: 6px;
-  color: #5d3b8c;
+  color: #374151;
+}
+
+.envolvidos span {
+  min-width: 0;
+  line-height: 1.4;
+  overflow-wrap: break-word;
 }
 
 .iconeEnvolvidos {
@@ -197,11 +207,15 @@
   height: 16px;
   display: block;
   flex-shrink: 0;
+  margin-top: 1px;
   color: #8f9991;
 }
 
 .data {
+  flex-shrink: 0;
+  margin-left: 12px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .footer {
@@ -305,5 +319,13 @@
   .pillNivel,
   .pillCategoria {
     padding: 4px 10px;
+  }
+
+  .rodape {
+    gap: 8px;
+  }
+
+  .data {
+    margin-left: 6px;
   }
 }

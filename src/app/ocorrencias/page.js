@@ -43,7 +43,16 @@ function parseCategorias(categorias) {
 
 function IconeEnvolvidos() {
   return (
-    <svg className={styles.iconeEnvolvidos} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      className={styles.iconeEnvolvidos}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
       <circle cx="9" cy="7" r="4" />
       <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
@@ -64,7 +73,17 @@ export default function Ocorrencias() {
     async function buscarOcorrencias() {
       const { data, error } = await supabase
         .from("ocorrencia")
-        .select("*")
+        .select(`
+          *,
+          ocorrencia_envolvido (
+            envolvido (
+              id,
+              nome,
+              matricula,
+              tipo
+            )
+          )
+        `)
         .order("data", { ascending: false });
 
       if (error) {
@@ -72,8 +91,10 @@ export default function Ocorrencias() {
       } else {
         setOcorrencias(data || []);
       }
+
       setCarregando(false);
     }
+
     buscarOcorrencias();
   }, []);
 
@@ -91,14 +112,23 @@ export default function Ocorrencias() {
       alert(`Erro ao excluir: ${error.message}`);
       return;
     }
-    setOcorrencias((lista) => lista.filter((ocorrencia) => ocorrencia.id !== id));
+
+    setOcorrencias((lista) =>
+      lista.filter((ocorrencia) => ocorrencia.id !== id)
+    );
   }
 
   return (
     <div className={styles.overlay}>
       <div className={styles.card}>
         <header className={styles.header}>
-          <Link href="/" className={styles.backButton} aria-label="Voltar">←</Link>
+          <Link
+            href="/"
+            className={styles.backButton}
+            aria-label="Voltar"
+          >
+            ←
+          </Link>
 
           <h1>Ocorrências</h1>
 
@@ -106,32 +136,63 @@ export default function Ocorrencias() {
         </header>
 
         <main className={styles.body}>
-          {carregando && <p className={styles.estado}>Carregando...</p>}
+          {carregando && (
+            <p className={styles.estado}>Carregando...</p>
+          )}
 
-          {erro && <p className={styles.estadoErro}>Erro ao carregar: {erro}</p>}
+          {erro && (
+            <p className={styles.estadoErro}>
+              Erro ao carregar: {erro}
+            </p>
+          )}
 
           {!carregando && !erro && ocorrencias.length === 0 && (
-            <p className={styles.estado}>Nenhuma ocorrência registrada.</p>
+            <p className={styles.estado}>
+              Nenhuma ocorrência registrada.
+            </p>
           )}
 
           {!carregando &&
             !erro &&
             ocorrencias.map((ocorrencia) => {
-              const categorias = parseCategorias(ocorrencia.categorias);
+              const categorias = parseCategorias(
+                ocorrencia.categorias
+              );
+
+              const envolvidos = (
+                ocorrencia.ocorrencia_envolvido || []
+              )
+                .map((item) => item.envolvido)
+                .filter(Boolean);
 
               return (
-                <article key={ocorrencia.id} className={styles.ocorrenciaCard}>
+                <article
+                  key={ocorrencia.id}
+                  className={styles.ocorrenciaCard}
+                >
                   <div className={styles.topo}>
                     <div className={styles.tags}>
-                      <span className={`${styles.pillNivel} ${styles[NIVEL_CLASSE[ocorrencia.nivel]] || ""}`}>
+                      <span
+                        className={`${styles.pillNivel} ${
+                          styles[
+                            NIVEL_CLASSE[ocorrencia.nivel]
+                          ] || ""
+                        }`}
+                      >
                         {ocorrencia.nivel}
                       </span>
 
                       {categorias.map((categoria, index) => {
-                        const texto = typeof categoria === "object" ? categoria.valor : categoria;
+                        const texto =
+                          typeof categoria === "object"
+                            ? categoria.valor
+                            : categoria;
 
                         return texto ? (
-                          <span key={`${texto}-${index}`} className={styles.pillCategoria}>
+                          <span
+                            key={`${texto}-${index}`}
+                            className={styles.pillCategoria}
+                          >
                             {texto}
                           </span>
                         ) : null;
@@ -139,7 +200,13 @@ export default function Ocorrencias() {
                     </div>
 
                     <div className={styles.statusWrapper}>
-                      <span className={`${styles.dot} ${styles[STATUS_CLASSE[ocorrencia.status]] || ""}`} />
+                      <span
+                        className={`${styles.dot} ${
+                          styles[
+                            STATUS_CLASSE[ocorrencia.status]
+                          ] || ""
+                        }`}
+                      />
 
                       <span className={styles.statusTexto}>
                         {ocorrencia.status}
@@ -149,8 +216,13 @@ export default function Ocorrencias() {
                         <button
                           type="button"
                           className={styles.menu}
-                          aria-label="Mais opções"
-                          onClick={() => setMenuAberto(menuAberto === ocorrencia.id ? null : ocorrencia.id)}
+                          onClick={() =>
+                            setMenuAberto(
+                              menuAberto === ocorrencia.id
+                                ? null
+                                : ocorrencia.id
+                            )
+                          }
                         >
                           ⋮
                         </button>
@@ -162,7 +234,9 @@ export default function Ocorrencias() {
                               className={styles.menuEditar}
                               onClick={() => {
                                 setMenuAberto(null);
-                                router.push(`/registrar-ocorrencia?id=${ocorrencia.id}`);
+                                router.push(
+                                  `/registrar-ocorrencia?id=${ocorrencia.id}`
+                                );
                               }}
                             >
                               ✎ Editar
@@ -171,7 +245,11 @@ export default function Ocorrencias() {
                             <button
                               type="button"
                               className={styles.menuExcluir}
-                              onClick={() => excluirOcorrencia(ocorrencia.id)}
+                              onClick={() =>
+                                excluirOcorrencia(
+                                  ocorrencia.id
+                                )
+                              }
                             >
                               🗑 Excluir
                             </button>
@@ -182,14 +260,18 @@ export default function Ocorrencias() {
                   </div>
 
                   <p className={styles.descricao}>
-                    {ocorrencia.descricao || "Descrição da ocorrência..."}
+                    {ocorrencia.descricao ||
+                      "Descrição da ocorrência..."}
                   </p>
 
                   <div className={styles.providenciasBox}>
-                    <span className={styles.providenciasTitulo}>☑ Providências</span>
+                    <span className={styles.providenciasTitulo}>
+                      ☑ Providências
+                    </span>
 
                     <p className={styles.providenciasTexto}>
-                      {ocorrencia.providencias || "Nenhuma providência registrada."}
+                      {ocorrencia.providencias ||
+                        "Nenhuma providência registrada."}
                     </p>
                   </div>
 
@@ -198,7 +280,14 @@ export default function Ocorrencias() {
                       <IconeEnvolvidos />
 
                       <span>
-                        {ocorrencia.envolvidos || "Envolvidos..."}
+                        {envolvidos.length
+                          ? envolvidos
+                              .map(
+                                (envolvido) =>
+                                  `${envolvido.nome} (${envolvido.matricula})`
+                              )
+                              .join(", ")
+                          : "Envolvidos..."}
                       </span>
                     </span>
 

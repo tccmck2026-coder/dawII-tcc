@@ -1,0 +1,27 @@
+.card {
+  width: 100%;
+  min-height: 100vh;
+  background: #f3f4f6;
+}
+
+.header {
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #6f8a6a;
+}
+
+.header h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 16px;
+}
+
+.body {
+  min-height: calc(100vh - 60px);
+}

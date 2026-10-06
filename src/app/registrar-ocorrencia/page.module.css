@@ -155,8 +155,8 @@
 .pillNivelGrave,
 .pillStatusAndamento {
   color: #713f12;
-  background: #facc15;
-  border-color: #facc15;
+  background: #FDE68A;
+  border-color: #FDE68A;
   font-weight: 600;
 }
 
@@ -315,4 +315,54 @@
   .registrar {
     width: 100%;
   }
+}
+.envolvidosContainer {
+  position: relative;
+}
+
+.listaEnvolvidos {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.opcaoEnvolvido {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 12px;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  cursor: pointer;
+}
+
+.opcaoEnvolvido:last-child {
+  border-bottom: none;
+}
+
+.opcaoEnvolvido:hover {
+  background: #f3f4f6;
+}
+
+.opcaoEnvolvido strong {
+  flex: 1;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.opcaoEnvolvido span {
+  color: #6b7280;
+  font-size: 12px;
+  white-space: nowrap;
 }
